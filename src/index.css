@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bolivar-green: #005931;
+  --color-bolivar-yellow: #FFD133;
+  --color-modern-green: #00C875;
+  --color-bg-app: #F8F9F8;
+  --color-text-main: #333333;
+  --color-bolivar-sec: #666666;
+  --color-border-light: #CCCCCC;
+
+  --radius-pill: 50px;
+  --radius-card: 12px;
+  --radius-input: 8px;
+
+  --shadow-card: 0px 4px 12px rgba(0,0,0,0.08);
+  --shadow-input-focus: 0px 0px 0px 3px rgba(0, 89, 49, 0.15);
+}
+
+@layer base {
+  body {
+    @apply bg-bg-app text-text-main font-sans antialiased overflow-hidden;
+  }
+  h1, h2, h3, h4 {
+    @apply text-bolivar-green font-bold;
+  }
+}
+
+@layer components {
+  .bv-card {
+    @apply bg-white border border-border-light rounded-card shadow-card p-8 mb-6;
+  }
+  .bv-input {
+    @apply w-full border border-border-light rounded-input px-4 py-3 transition-all text-text-main bg-white focus:outline-none focus:border-bolivar-green focus:shadow-input-focus;
+  }
+  .bv-label {
+    @apply block text-sm font-semibold text-bolivar-sec mb-1.5;
+  }
+  .bv-btn-pill-primary {
+    @apply bg-bolivar-yellow text-bolivar-green font-bold rounded-pill px-10 py-3 transition-all border-none cursor-pointer inline-flex items-center justify-center text-base hover:brightness-95 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .bv-btn-pill-secondary {
+    @apply bg-white text-bolivar-sec font-semibold rounded-pill px-10 py-3 border border-border-light transition-all hover:bg-bg-app hover:border-gray-400;
+  }
+
+  /* Stepper */
+  .stepper-container {
+    @apply flex justify-between mb-10 relative max-w-[900px] mx-auto;
+  }
+  .stepper-line {
+    @apply absolute top-[18px] left-0 right-0 h-[2px] bg-gray-200 z-0;
+  }
+  .stepper-line-progress {
+    @apply absolute top-[18px] left-0 h-[2px] bg-modern-green z-1 transition-all duration-300;
+  }
+  .step-item {
+    @apply z-10 text-center relative w-[120px];
+  }
+  .step-dot {
+    @apply w-9 h-9 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center mx-auto mb-2 font-bold text-bolivar-sec;
+  }
+  .step-item.active .step-dot {
+    @apply border-bolivar-green bg-bolivar-green text-white shadow-[0_0_0_4px_rgba(0,89,49,0.1)];
+  }
+  .step-item.completed .step-dot {
+    @apply border-modern-green bg-modern-green text-white;
+  }
+  .step-label {
+    @apply text-[11px] font-semibold text-bolivar-sec;
+  }
+  .step-item.active .step-label, .step-item.completed .step-label {
+    @apply text-bolivar-green;
+  }
+
+  /* Accordion */
+  .accordion-header {
+    @apply cursor-pointer flex justify-between items-center p-4 bg-[#F0F7F4] rounded-lg border border-[#D1E7DD] mb-2 transition-colors hover:bg-[#E2F0E9];
+  }
+  .accordion-content {
+    @apply overflow-hidden transition-all duration-300 max-h-0;
+  }
+  .accordion-content.open {
+    @apply max-h-[2000px] py-4;
+  }
+
+  /* Ahorro Table */
+  .ahorro-table-container {
+    @apply border border-gray-200 rounded-lg overflow-hidden bg-white;
+  }
+  .ahorro-table-header {
+    @apply grid bg-gray-50 border-b border-gray-200;
+  }
+  .ahorro-table-header-cell {
+    @apply p-2 text-[10px] font-bold text-bolivar-green uppercase text-center border-r border-gray-200 last:border-r-0 flex items-center justify-center leading-tight;
+  }
+  .ahorro-table-row {
+    @apply grid border-b border-gray-100 last:border-b-0;
+  }
+  .ahorro-table-cell {
+    @apply p-2 border-r border-gray-100 last:border-r-0;
+  }
+  .ahorro-table-cell .bv-input {
+    @apply py-1.5 px-2 text-xs border-gray-200 focus:border-modern-green;
+  }
+  .ahorro-table-cell .bv-label {
+    @apply hidden;
+  }
+  .ahorro-table-cell div {
+    @apply mb-0;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    @apply w-[260px] bg-white border-r border-gray-100 flex flex-col h-screen fixed left-0 top-0 z-50;
+  }
+  .menu-item {
+    @apply flex items-center gap-3 px-5 py-3 text-bolivar-sec text-sm cursor-pointer transition-all border-l-4 border-transparent hover:bg-bg-app hover:text-bolivar-green;
+  }
+  .menu-item.active {
+    @apply bg-[#E6F4EE] text-bolivar-green font-semibold border-l-modern-green;
+  }
+  .menu-section-title {
+    @apply text-[10px] font-bold text-gray-400 uppercase px-5 pt-5 pb-2 tracking-widest;
+  }
+
+  /* Main Content */
+  .main-content {
+    @apply ml-[260px] h-screen overflow-y-auto pb-20;
+  }
+
+  /* Table */
+  .cov-table {
+    @apply w-full border-collapse text-sm;
+  }
+  .cov-table th {
+    @apply text-left text-bolivar-green border-b-2 border-[#E6F4EE] p-3;
+  }
+  .cov-table td {
+    @apply border-b border-gray-100 p-3 text-text-main;
+  }
+  .cov-table tr:hover td {
+    @apply bg-bg-app;
+  }
+}
+
+.required-star {
+  @apply text-red-600 ml-0.5;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-out forwards;
+}
